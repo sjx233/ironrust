@@ -1,0 +1,61 @@
+plugins {
+  id "fabric-loom" version "0.4-SNAPSHOT"
+  id "maven-publish"
+}
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = project.name
+version = project.version
+group = project.group
+
+dependencies {
+  minecraft "com.mojang:minecraft:${project.minecraft_version}"
+  mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
+  modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+  inputs.property "version", project.version
+  filesMatching("fabric.mod.json") {
+    expand "version": project.version
+  }
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+  archiveClassifier.set("sources")
+  from sourceSets.main.allSource
+}
+
+jar {
+  from "LICENSE"
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifact(jar) {
+        builtBy remapJar
+      }
+      artifact(sourcesJar) {
+        builtBy remapSourcesJar
+      }
+    }
+  }
+  repositories {
+    mavenLocal()
+  }
+}
+
+runClient {
+  maxHeapSize = "2G"
+}
+
+runServer {
+  maxHeapSize = "2G"
+}

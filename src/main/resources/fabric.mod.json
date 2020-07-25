@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "ironrust",
+  "version": "${version}",
+  "name": "Iron Rust",
+  "description": "Iron + Oxygen!",
+  "authors": [
+    "sjx233"
+  ],
+  "contact": {
+    "sources": "https://github.com/sjx233/ironrust"
+  },
+  "license": "MIT",
+  "icon": "assets/ironrust/textures/item/rust_powder.png",
+  "entrypoints": {
+    "main": [
+      "io.github.sjx233.ironrust.IronRustMod"
+    ],
+    "client": [
+      "io.github.sjx233.ironrust.IronRustClientMod"
+    ]
+  },
+  "mixins": [
+    "ironrust.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
+}

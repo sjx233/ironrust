@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "ironrust:block/rust_dirt"
+    },
+    "snowy=true": {
+      "model": "block/grass_block_snow"
+    }
+  }
+}

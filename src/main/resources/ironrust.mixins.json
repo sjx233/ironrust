@@ -1,0 +1,17 @@
+{
+  "package": "io.github.sjx233.ironrust.mixin",
+  "mixins": [
+    "MixinBlocks",
+    "MixinCriteriaTriggers",
+    "MixinDeadBushBlock",
+    "MixinGameRules",
+    "MixinIntegerValue",
+    "MixinPotionBrewing"
+  ],
+  "client": [
+    "client.MixinClientPacketListener"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

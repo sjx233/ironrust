@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "ironrust:rust_powder"
+    }
+  },
+  "result": {
+    "item": "ironrust:rust_helmet"
+  }
+}

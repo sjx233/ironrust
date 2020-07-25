@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "block/dirt",
+    "top": "ironrust:block/rust_dirt_top",
+    "side": "ironrust:block/rust_dirt_side"
+  }
+}

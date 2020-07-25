@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ironrust:rust_block"
+    ]
+  },
+  "criteria": {
+    "has_at_least_9_rust_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ironrust:rust_powder",
+            "count": {
+              "min": 9
+            }
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ironrust:rust_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_at_least_9_rust_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

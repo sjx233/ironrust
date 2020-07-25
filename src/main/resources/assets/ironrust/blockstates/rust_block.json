@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ironrust:block/rust_block"
+    }
+  }
+}

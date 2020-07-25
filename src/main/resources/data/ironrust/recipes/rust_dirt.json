@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ironrust:rust_powder"
+    },
+    {
+      "item": "minecraft:podzol"
+    }
+  ],
+  "result": {
+    "item": "ironrust:rust_dirt"
+  }
+}

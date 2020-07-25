@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "ironrust:rust_powder"
+    },
+    "title": {
+      "translate": "advancements.ironrust.rust.critical_hit.title"
+    },
+    "description": {
+      "translate": "advancements.ironrust.rust.critical_hit.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "ironrust:rust/everything_rusts",
+  "criteria": {
+    "cow": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "damage": {
+          "type": {
+            "is_projectile": true,
+            "direct_entity": {
+              "type": "ironrust:rust_powder"
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:cow"
+        }
+      }
+    }
+  }
+}

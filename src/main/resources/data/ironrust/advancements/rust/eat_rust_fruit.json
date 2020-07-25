@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "ironrust:rust_fruit"
+    },
+    "title": {
+      "translate": "advancements.ironrust.rust.eat_rust_fruit.title"
+    },
+    "description": {
+      "translate": "advancements.ironrust.rust.eat_rust_fruit.description"
+    }
+  },
+  "parent": "ironrust:rust/root",
+  "criteria": {
+    "rust_apple": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "ironrust:rust_fruit"
+        }
+      }
+    }
+  }
+}
