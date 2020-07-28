@@ -76,15 +76,14 @@ public class RustPowder extends ThrownItemEntity {
       if (isServer) {
         MinecraftServer server = ((ServerWorld) world).getServer();
         RegistryKey<World> source = world.getRegistryKey();
+        RegistryKey<World> destination = IronRustDimensions.RUST.equals(source) ? World.OVERWORLD : IronRustDimensions.RUST;
         // Are there better ways to schedule the teleportation?
-        server.getSaveProperties().getMainWorldProperties().getScheduledEvents().setEvent(entity.getUuidAsString(), world.getTime() + 1,
-          new TeleportTimerCallback(entity.getUuid(), source, IronRustDimensions.RUST.equals(source) ? World.OVERWORLD : IronRustDimensions.RUST));
+        server.getSaveProperties().getMainWorldProperties().getScheduledEvents().setEvent("ironrust:teleport[" + entity.getUuidAsString(), world.getTime() + 1, new TeleportTimerCallback(entity.getUuid(), source, destination));
       }
       return;
     }
     entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 8f);
-    if (isServer && entity instanceof LivingEntity && !entity.removed
-        && ((LivingEntity) entity).getHealth() > 0f) {
+    if (isServer && entity instanceof LivingEntity && !entity.removed && ((LivingEntity) entity).getHealth() > 0f) {
       if (entity.getType() == EntityType.COW) {
         RustyCow newEntity = IronRustEntityType.RUSTY_COW.create(world);
         newEntity.copyPositionAndRotation(entity);

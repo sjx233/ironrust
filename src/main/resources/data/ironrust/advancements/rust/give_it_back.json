@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancements.ironrust.rust.give_it_back.description"
     },
-    "frame": "challenge"
+    "frame": "goal"
   },
   "parent": "ironrust:rust/root",
   "rewards": {
