@@ -10,10 +10,8 @@ version = project.version
 group = project.group
 
 repositories {
-  maven {
-    name = "Earthcomputer Mods"
-    url = "https://dl.bintray.com/earthcomputer/mods"
-  }
+  maven { url = "https://jitpack.io" }
+  maven { url = "https://dl.bintray.com/earthcomputer/mods" }
 }
 
 dependencies {
@@ -22,6 +20,9 @@ dependencies {
   modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
   modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
   modImplementation "net.earthcomputer:libstructure:${project.libstructure_version}"
+  modRuntime("com.github.SuperCoder7979:databreaker:0.2.5") {
+    exclude module: "fabric-loader"
+  }
 }
 
 processResources {
