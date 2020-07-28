@@ -9,7 +9,6 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -18,11 +17,6 @@ public class AbandonedHutFeature extends StructureFeature<DefaultFeatureConfig> 
   public AbandonedHutFeature(Codec<DefaultFeatureConfig> codec) {
     super(codec);
   }
-
-  @Override
-  public GenerationStep.Feature method_28663() {
-    return GenerationStep.Feature.SURFACE_STRUCTURES;
- }
 
   @Override
   public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory() {

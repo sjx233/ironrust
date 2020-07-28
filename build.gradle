@@ -9,11 +9,19 @@ archivesBaseName = project.name
 version = project.version
 group = project.group
 
+repositories {
+  maven {
+    name = "Earthcomputer Mods"
+    url = "https://dl.bintray.com/earthcomputer/mods"
+  }
+}
+
 dependencies {
   minecraft "com.mojang:minecraft:${project.minecraft_version}"
   mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
   modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
   modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+  modImplementation "net.earthcomputer:libstructure:${project.libstructure_version}"
 }
 
 processResources {

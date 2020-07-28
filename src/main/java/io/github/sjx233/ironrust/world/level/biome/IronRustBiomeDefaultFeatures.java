@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class IronRustBiomeFeatures {
+public class IronRustBiomeDefaultFeatures {
   public static final BlockState RUST_BLOCK = IronRustBlocks.RUST_BLOCK.getDefaultState();
   public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> ABANDONED_HUT = IronRustStructureFeature.ABANDONED_HUT.configure(DefaultFeatureConfig.INSTANCE);
 
