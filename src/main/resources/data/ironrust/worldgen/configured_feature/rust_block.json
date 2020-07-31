@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:decorated",
+  "config": {
+    "feature": {
+      "type": "minecraft:decorated",
+      "config": {
+        "feature": {
+          "type": "minecraft:forest_rock",
+          "config": {
+            "state": {
+              "Name": "ironrust:rust_block"
+            }
+          }
+        },
+        "decorator": {
+          "type": "minecraft:decorated",
+          "config": {
+            "outer": {
+              "type": "minecraft:square",
+              "config": {}
+            },
+            "inner": {
+              "type": "minecraft:heightmap",
+              "config": {}
+            }
+          }
+        }
+      }
+    },
+    "decorator": {
+      "type": "minecraft:count",
+      "config": {
+        "count": {
+          "base": 0,
+          "spread": 2
+        }
+      }
+    }
+  }
+}

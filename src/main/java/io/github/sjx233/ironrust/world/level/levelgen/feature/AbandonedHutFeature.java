@@ -8,6 +8,7 @@ import net.minecraft.structure.StructureStart;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -29,7 +30,7 @@ public class AbandonedHutFeature extends StructureFeature<DefaultFeatureConfig> 
     }
 
     @Override
-    public void init(ChunkGenerator generator, StructureManager manager, int chunkX, int chunkZ, Biome biome, DefaultFeatureConfig config) {
+    public void init(DynamicRegistryManager registries, ChunkGenerator generator, StructureManager manager, int chunkX, int chunkZ, Biome biome, DefaultFeatureConfig config) {
       this.children.add(new AbandonedHutPiece(manager, new BlockPos(chunkX * 16, 90, chunkZ * 16), BlockRotation.random(this.random)));
       this.setBoundingBoxFromChildren();
     }

@@ -7,7 +7,6 @@ import io.github.sjx233.ironrust.world.entity.RustPowder;
 import io.github.sjx233.ironrust.world.item.IronRustItems;
 import io.github.sjx233.ironrust.world.item.alchemy.IronRustPotions;
 import io.github.sjx233.ironrust.world.level.IronRustGameRules;
-import io.github.sjx233.ironrust.world.level.biome.IronRustBiomes;
 import io.github.sjx233.ironrust.world.level.block.IronRustBlocks;
 import io.github.sjx233.ironrust.world.level.dimension.IronRustDimensions;
 import io.github.sjx233.ironrust.world.level.levelgen.feature.IronRustStructureFeature;
@@ -39,7 +38,6 @@ public class IronRustMod implements ModInitializer {
     IronRustPotions.init();
     IronRustStructurePieceType.init();
     IronRustStructureFeature.init();
-    IronRustBiomes.init();
     IronRustDimensions.init();
     IronRustGameRules.init();
     IronRustSoundEvents.init();

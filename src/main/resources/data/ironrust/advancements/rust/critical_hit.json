@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "ironrust:rust_powder"
+      "item": "ironrust:rust_sword"
     },
     "title": {
       "translate": "advancements.ironrust.rust.critical_hit.title"

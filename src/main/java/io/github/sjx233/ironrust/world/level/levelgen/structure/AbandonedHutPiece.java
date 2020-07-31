@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
@@ -57,16 +57,16 @@ public class AbandonedHutPiece extends SimpleStructurePiece {
   }
 
   @Override
-  public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
+  public boolean generate(StructureWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
     BlockPos pos = this.pos;
     this.pos = pos.add(0, world.getTopY(Heightmap.Type.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) - 90, 0);
     boolean success = super.generate(world, accessor, generator, random, box, chunkPos, blockPos);
     this.pos = pos;
     return success;
-}
+  }
 
   @Override
-  protected void handleMetadata(String id, BlockPos pos, WorldAccess world, Random random, BlockBox box) {
+  protected void handleMetadata(String id, BlockPos pos, ServerWorldAccess world, Random random, BlockBox box) {
     if ("furnace".equals(id)) {
       world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
       BlockEntity inv = world.getBlockEntity(pos.down());

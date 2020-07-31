@@ -6,7 +6,6 @@ import io.github.sjx233.ironrust.IronRustMod;
 import io.github.sjx233.ironrust.world.effect.IronRustMobEffects;
 import io.github.sjx233.ironrust.world.item.IronRustItems;
 import io.github.sjx233.ironrust.world.level.dimension.IronRustDimensions;
-import net.minecraft.block.pattern.BlockPattern.TeleportTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -24,8 +23,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -133,7 +130,6 @@ public class RustPowder extends ThrownItemEntity {
       }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void call(MinecraftServer server, Timer<MinecraftServer> events, long time) {
       ServerWorld source = server.getWorld(this.source);
@@ -142,30 +138,7 @@ public class RustPowder extends ThrownItemEntity {
       if (destination == null) return;
       Entity entity = source.getEntity(this.entityId);
       if (entity == null) return;
-      net.fabricmc.fabric.api.dimension.v1.FabricDimensions.teleport(entity, destination, TeleportTimerCallback::placeEntity);
-    }
-
-    private static TeleportTarget placeEntity(Entity teleported, ServerWorld destination, Direction portalDir, double horizontalOffset, double verticalOffset) {
-      BlockPos pos = teleported.getBlockPos();
-      BlockPos.Mutable newPos = pos.mutableCopy();
-      while (!isSolid(destination, newPos.down()))
-        newPos.move(Direction.DOWN);
-      for (;;) {
-        if (isSolid(destination, newPos.up())) {
-          newPos.move(Direction.UP, 2);
-          continue;
-        }
-        if (isSolid(destination, newPos)) {
-          newPos.move(Direction.UP);
-          continue;
-        }
-        break;
-      }
-      return new TeleportTarget(teleported.getPos().add(0, newPos.getY() - pos.getY(), 0), teleported.getVelocity(), (int) teleported.yaw);
-    }
-
-    private static boolean isSolid(World world, BlockPos pos) {
-      return world.getBlockState(pos).getMaterial().isSolid();
+      entity.moveToWorld(destination);
     }
   }
 }

@@ -15,7 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 
 @Mixin(ClientPlayNetworkHandler.class)
-public class MixinClientPacketListener {
+public abstract class MixinClientPacketListener {
   @Shadow
   private ClientWorld world;
 

@@ -11,7 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 
 @Mixin(Blocks.class)
-public class MixinBlocks {
+public abstract class MixinBlocks {
   @Inject(method = "register", at = @At("HEAD"), cancellable = true)
   private static void ironrust_register(String id, Block block, CallbackInfoReturnable<Block> ci) {
     if ("iron_block".equals(id)) ci.setReturnValue(Registry.register(Registry.BLOCK, id, new IronBlock(Block.Settings.copy(block).ticksRandomly())));

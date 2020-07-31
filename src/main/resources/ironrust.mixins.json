@@ -4,6 +4,7 @@
     "MixinBlocks",
     "MixinCriteriaTriggers",
     "MixinDeadBushBlock",
+    "MixinEntity",
     "MixinGameRules",
     "MixinIntegerValue",
     "MixinPotionBrewing"

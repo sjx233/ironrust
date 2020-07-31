@@ -17,7 +17,7 @@
     "entered_rust_dimension": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "rust"
+        "to": "ironrust:rust"
       }
     }
   }

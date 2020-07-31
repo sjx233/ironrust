@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
 @Mixin(DeadBushBlock.class)
-public class MixinDeadBushBlock {
+public abstract class MixinDeadBushBlock {
   @Inject(method = "canPlantOnTop", at = @At("HEAD"), cancellable = true)
   private void ironrust_mayPlaceOn(BlockState floor, BlockView view, BlockPos pos, CallbackInfoReturnable<Boolean> ci) {
     if (floor.getBlock() == IronRustBlocks.RUST_DIRT) ci.setReturnValue(true);
