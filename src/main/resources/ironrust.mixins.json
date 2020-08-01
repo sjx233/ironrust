@@ -5,8 +5,6 @@
     "MixinCriteriaTriggers",
     "MixinDeadBushBlock",
     "MixinEntity",
-    "MixinGameRules",
-    "MixinIntegerValue",
     "MixinPotionBrewing"
   ],
   "client": [
