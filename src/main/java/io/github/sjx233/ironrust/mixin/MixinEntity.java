@@ -31,18 +31,18 @@ public abstract class MixinEntity {
   private Vec3d velocity;
 
   @Inject(method = "getTeleportTarget", at = @At("HEAD"), cancellable = true)
-  private void ironrust_findDimensionEntryPoint(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> ci) {
+  private void findDimensionEntryPoint(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> ci) {
     if (this.world.getRegistryKey() == IronRustDimensions.RUST || destination.getRegistryKey() == IronRustDimensions.RUST) {
       BlockPos pos = this.blockPos;
       BlockPos.Mutable newPos = pos.mutableCopy();
-      while (!ironrust_isSolid(destination, newPos.down()))
+      while (!isSolid(destination, newPos.down()))
         newPos.move(Direction.DOWN);
       for (;;) {
-        if (ironrust_isSolid(destination, newPos.up())) {
+        if (isSolid(destination, newPos.up())) {
           newPos.move(Direction.UP, 2);
           continue;
         }
-        if (ironrust_isSolid(destination, newPos)) {
+        if (isSolid(destination, newPos)) {
           newPos.move(Direction.UP);
           continue;
         }
@@ -52,7 +52,7 @@ public abstract class MixinEntity {
     }
   }
 
-  private static boolean ironrust_isSolid(World world, BlockPos pos) {
+  private static boolean isSolid(World world, BlockPos pos) {
     return world.getBlockState(pos).getMaterial().isSolid();
   }
 }

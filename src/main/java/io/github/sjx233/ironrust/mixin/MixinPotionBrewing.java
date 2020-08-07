@@ -10,7 +10,7 @@ import net.minecraft.recipe.BrewingRecipeRegistry;
 @Mixin(BrewingRecipeRegistry.class)
 public interface MixinPotionBrewing {
   @Invoker("registerPotionRecipe")
-  public static void ironrust_addMix(Potion input, Item item, Potion output) {
+  public static void addMix(Potion input, Item item, Potion output) {
     throw new AssertionError();
   }
 }

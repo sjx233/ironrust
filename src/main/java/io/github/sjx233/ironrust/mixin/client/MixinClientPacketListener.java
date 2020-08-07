@@ -20,7 +20,7 @@ public abstract class MixinClientPacketListener {
   private ClientWorld world;
 
   @Inject(method = "onEntitySpawn", at = @At(value = "INVOKE", target = "net/minecraft/network/NetworkThreadUtils.forceMainThread(Lnet/minecraft/network/Packet;Lnet/minecraft/network/listener/PacketListener;Lnet/minecraft/util/thread/ThreadExecutor;)V", shift = Shift.AFTER))
-  public void ironrust_handleAddEntity(EntitySpawnS2CPacket packet, CallbackInfo ci) {
+  public void handleAddEntity(EntitySpawnS2CPacket packet, CallbackInfo ci) {
     if (packet.getEntityTypeId() == IronRustEntityType.RUST_POWDER) {
       int id = packet.getId();
       double x = packet.getX();

@@ -18,9 +18,9 @@ public enum IronRustPotions {
   public static final Potion STRONG_RUST = register("strong_rust", new Potion("rust", new StatusEffectInstance(IronRustMobEffects.RUST, 1800, 1)));
 
   static {
-    MixinPotionBrewing.ironrust_addMix(Potions.AWKWARD, IronRustItems.RUST_FRUIT, RUST);
-    MixinPotionBrewing.ironrust_addMix(RUST, Items.REDSTONE, LONG_RUST);
-    MixinPotionBrewing.ironrust_addMix(RUST, Items.GLOWSTONE_DUST, STRONG_RUST);
+    MixinPotionBrewing.addMix(Potions.AWKWARD, IronRustItems.RUST_FRUIT, RUST);
+    MixinPotionBrewing.addMix(RUST, Items.REDSTONE, LONG_RUST);
+    MixinPotionBrewing.addMix(RUST, Items.GLOWSTONE_DUST, STRONG_RUST);
   }
 
   private static Potion register(String id, Potion potion) {
