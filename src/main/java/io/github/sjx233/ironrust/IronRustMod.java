@@ -12,7 +12,7 @@ import io.github.sjx233.ironrust.world.level.dimension.IronRustDimensions;
 import io.github.sjx233.ironrust.world.level.levelgen.feature.IronRustStructureFeature;
 import io.github.sjx233.ironrust.world.level.levelgen.feature.IronRustStructurePieceType;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.block.ComposterBlock;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -47,6 +47,6 @@ public class IronRustMod implements ModInitializer {
         return Util.make(new RustPowder(world, pos.getX(), pos.getY(), pos.getZ()), entity -> entity.setItem(stack));
       }
     });
-    ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(IronRustItems.RUST_FRUIT, 0.5f);
+    CompostingChanceRegistry.INSTANCE.add(IronRustItems.RUST_FRUIT, 0.5f);
   }
 }
