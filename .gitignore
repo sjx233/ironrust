@@ -1,25 +1,23 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
+# eclipse + vscode
 .project
+.classpath
+.settings/
+.metadata/
+.vscode/
+bin/
+*.launch
 
 # idea
-out
-*.ipr
 *.iws
+*.ipr
 *.iml
-.idea
+.idea/
+out/
 
 # gradle
-build
-gradle
-.gradle
-gradlew
+.gradle/
+build/
 
 # other
 .DS_Store
-.vscode
 /run
