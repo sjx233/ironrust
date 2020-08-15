@@ -70,7 +70,7 @@ public class AbandonedHutPiece extends SimpleStructurePiece {
     if ("furnace".equals(id)) {
       world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
       BlockEntity inv = world.getBlockEntity(pos.down());
-      if (inv instanceof Inventory) ((Inventory) inv).setStack(1, new ItemStack(Items.COAL, random.nextInt(8) + 1));
+      if (inv instanceof Inventory) ((Inventory) inv).setStack(1, new ItemStack(Items.CHARCOAL, random.nextInt(8) + 1));
     }
   }
 }
