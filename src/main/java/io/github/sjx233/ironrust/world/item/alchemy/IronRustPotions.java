@@ -1,7 +1,7 @@
 package io.github.sjx233.ironrust.world.item.alchemy;
 
 import io.github.sjx233.ironrust.IronRustMod;
-import io.github.sjx233.ironrust.mixin.MixinPotionBrewing;
+import io.github.sjx233.ironrust.mixin.PotionBrewingAccessor;
 import io.github.sjx233.ironrust.world.effect.IronRustMobEffects;
 import io.github.sjx233.ironrust.world.item.IronRustItems;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -18,9 +18,9 @@ public enum IronRustPotions {
   public static final Potion STRONG_RUST = register("strong_rust", new Potion("rust", new StatusEffectInstance(IronRustMobEffects.RUST, 1800, 1)));
 
   static {
-    MixinPotionBrewing.addMix(Potions.AWKWARD, IronRustItems.RUST_FRUIT, RUST);
-    MixinPotionBrewing.addMix(RUST, Items.REDSTONE, LONG_RUST);
-    MixinPotionBrewing.addMix(RUST, Items.GLOWSTONE_DUST, STRONG_RUST);
+    PotionBrewingAccessor.addMix(Potions.AWKWARD, IronRustItems.RUST_FRUIT, RUST);
+    PotionBrewingAccessor.addMix(RUST, Items.REDSTONE, LONG_RUST);
+    PotionBrewingAccessor.addMix(RUST, Items.GLOWSTONE_DUST, STRONG_RUST);
   }
 
   private static Potion register(String id, Potion potion) {
