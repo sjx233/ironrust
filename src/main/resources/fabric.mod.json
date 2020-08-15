@@ -26,6 +26,6 @@
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": ">=0.18.0",
-    "libstructure": ">=1.4.0"
+    "libstructure": ">=1.5"
   }
 }
