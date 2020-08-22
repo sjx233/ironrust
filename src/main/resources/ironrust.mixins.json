@@ -4,6 +4,7 @@
     "MixinBlocks",
     "MixinDeadBushBlock",
     "MixinEntity",
+    "MixinServerLevel",
     "PotionBrewingAccessor"
   ],
   "client": [

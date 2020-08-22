@@ -1,11 +1,10 @@
 package io.github.sjx233.ironrust.world.entity;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import io.github.sjx233.ironrust.IronRustMod;
 import io.github.sjx233.ironrust.world.effect.IronRustMobEffects;
 import io.github.sjx233.ironrust.world.item.IronRustItems;
-import io.github.sjx233.ironrust.world.level.dimension.IronRustDimensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -14,23 +13,17 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.timer.Timer;
-import net.minecraft.world.timer.TimerCallback;
-import net.minecraft.world.timer.TimerCallbackSerializer;
 
 public class RustPowder extends ThrownItemEntity {
+  public static final List<Entity> pendingTeleportations = new ArrayList<>();
+
   public RustPowder(EntityType<? extends RustPowder> type, World world) {
     super(type, world);
   }
@@ -67,22 +60,16 @@ public class RustPowder extends ThrownItemEntity {
   }
 
   private void hitEntity(Entity entity) {
-    World world = entity.world;
-    boolean isServer = world != null && !world.isClient;
-    if (entity instanceof LivingEntity && ((LivingEntity) entity).hasStatusEffect(IronRustMobEffects.RUST)) {
-      if (isServer) {
-        MinecraftServer server = ((ServerWorld) world).getServer();
-        RegistryKey<World> source = world.getRegistryKey();
-        RegistryKey<World> destination = IronRustDimensions.RUST.equals(source) ? World.OVERWORLD : IronRustDimensions.RUST;
-        // Are there better ways to schedule the teleportation?
-        server.getSaveProperties().getMainWorldProperties().getScheduledEvents().setEvent("ironrust:teleport[" + entity.getUuidAsString(), world.getTime() + 1, new TeleportTimerCallback(entity.getUuid(), source, destination));
-      }
+    boolean isServer = entity.world instanceof ServerWorld;
+    boolean isLiving = entity instanceof LivingEntity;
+    if (isLiving && ((LivingEntity) entity).hasStatusEffect(IronRustMobEffects.RUST)) {
+      if (isServer) pendingTeleportations.add(entity);
       return;
     }
     entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 8f);
-    if (isServer && entity instanceof LivingEntity && !entity.removed && ((LivingEntity) entity).getHealth() > 0f) {
+    if (isServer && isLiving && entity.isAlive()) {
       if (entity.getType() == EntityType.COW) {
-        RustyCow newEntity = IronRustEntityType.RUSTY_COW.create(world);
+        RustyCow newEntity = IronRustEntityType.RUSTY_COW.create(entity.world);
         newEntity.copyPositionAndRotation(entity);
         newEntity.setVelocity(entity.getVelocity());
         newEntity.fallDistance = entity.fallDistance;
@@ -94,51 +81,6 @@ public class RustPowder extends ThrownItemEntity {
         entity.world.spawnEntity(newEntity);
         entity.remove();
       }
-    }
-  }
-
-  public static class TeleportTimerCallback implements TimerCallback<MinecraftServer> {
-    private final UUID entityId;
-    private final RegistryKey<World> source;
-    private final RegistryKey<World> destination;
-
-    static {
-      TimerCallbackSerializer.INSTANCE.registerSerializer(new TeleportTimerCallback.Serializer());
-    }
-
-    public TeleportTimerCallback(UUID entityId, RegistryKey<World> source, RegistryKey<World> destination) {
-      this.entityId = entityId;
-      this.source = source;
-      this.destination = destination;
-    }
-
-    public static class Serializer extends TimerCallback.Serializer<MinecraftServer, TeleportTimerCallback> {
-      public Serializer() {
-        super(IronRustMod.makeId("teleport"), TeleportTimerCallback.class);
-      }
-
-      public void serialize(CompoundTag tag, TeleportTimerCallback callback) {
-        tag.putUuid("Entity", callback.entityId);
-        tag.putString("Source", callback.source.getValue().toString());
-        tag.putString("Destination", callback.destination.getValue().toString());
-      }
-
-      public TeleportTimerCallback deserialize(CompoundTag tag) {
-        return new TeleportTimerCallback(tag.getUuid("Entity"),
-          RegistryKey.of(Registry.DIMENSION, new Identifier(tag.getString("Source"))),
-          RegistryKey.of(Registry.DIMENSION, new Identifier(tag.getString("Destination"))));
-      }
-    }
-
-    @Override
-    public void call(MinecraftServer server, Timer<MinecraftServer> events, long time) {
-      ServerWorld source = server.getWorld(this.source);
-      if (source == null) return;
-      ServerWorld destination = server.getWorld(this.destination);
-      if (destination == null) return;
-      Entity entity = source.getEntity(this.entityId);
-      if (entity == null) return;
-      entity.moveToWorld(destination);
     }
   }
 }

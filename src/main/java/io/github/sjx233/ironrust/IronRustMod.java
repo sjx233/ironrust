@@ -14,13 +14,7 @@ import io.github.sjx233.ironrust.world.level.levelgen.feature.IronRustStructureP
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.Position;
-import net.minecraft.world.World;
 
 public class IronRustMod implements ModInitializer {
   public static final String MODID = "ironrust";
@@ -41,12 +35,7 @@ public class IronRustMod implements ModInitializer {
     IronRustDimensions.init();
     IronRustGameRules.init();
     IronRustSoundEvents.init();
-    DispenserBlock.registerBehavior(IronRustItems.RUST_POWDER, new ProjectileDispenserBehavior() {
-      @Override
-      protected ProjectileEntity createProjectile(World world, Position pos, ItemStack stack) {
-        return Util.make(new RustPowder(world, pos.getX(), pos.getY(), pos.getZ()), entity -> entity.setItem(stack));
-      }
-    });
+    DispenserBlock.registerBehavior(IronRustItems.RUST_POWDER, new ThrowableItemDispenseBehavior(RustPowder::new));
     CompostingChanceRegistry.INSTANCE.add(IronRustItems.RUST_FRUIT, 0.5f);
   }
 }
