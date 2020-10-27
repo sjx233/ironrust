@@ -30,7 +30,8 @@ public enum IronRustEntityType {
     FabricEntityTypeBuilder.<RustPowder>create()
       .entityFactory(RustPowder::new)
       .dimensions(EntityDimensions.changing(0.25f, 0.25f))
-      .trackable(4, 10)
+      .trackRangeChunks(4)
+      .trackedUpdateRate(10)
       .build());
 
   private static <T extends Entity> EntityType<T> register(String id, EntityType<T> type) {
